@@ -1,12 +1,36 @@
+#!/usr/bin/env python
+
 import argparse
 
+# define argument parser
 parser = argparse.ArgumentParser(description='A simple email campaign script')
 
-parser.add_argument('-c', action="store_true",
-                    default="email.csv",
-                    dest="csv_file",
-                    help="CSV file as an input, if skipped will take default CSV in the current working dir")
+# Add arguments
+parser.add_argument('-c',
+                    default="email_data.csv",
+                    help="csv file to parse",
+                    dest="csv_file")
 
-results = parser.parse_args()
+parser.add_argument('-n',
+                    default=-1,
+                    help="no of lines to read",
+                    type=int,
+                    dest="row_count")
 
-print results
+parser.add_argument('-emails',
+                    nargs='+',
+                    type=str,
+                    help="send email to only these emails",
+                    dest="emails")
+
+
+arguments = parser.parse_args()
+
+print "csv file:", arguments.csv_file, "type:", type(arguments.csv_file)
+
+print "row count:", arguments.row_count, "type:", type(arguments.row_count)
+
+print "emails", arguments.emails, "type:", type(arguments.emails)
+
+
+
