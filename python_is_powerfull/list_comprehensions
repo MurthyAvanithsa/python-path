@@ -1,0 +1,11 @@
+# a simple  way to create a list of even  number using list_comprehensions
+
+even_numbers = [i for i in range(1,100) if i%2==0]
+print even_numbers
+
+# a primitive way of writing the same above is
+even_numbers=[]
+for i in range(1, 100):
+    if i%2 == 0:
+        even_numbers.append(i)
+print even_numbers
