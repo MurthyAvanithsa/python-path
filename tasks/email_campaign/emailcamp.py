@@ -13,6 +13,8 @@ EMAIL_CSV_FILE = "email_data.csv"
 REQUIRED_FIELDS = ["email", "first_name", "last_name"]
 
 
+
+
 # Send email using request object
 def send_email(to_address, body):
 
@@ -30,12 +32,15 @@ def create_email_string(first_name):
     return emailtemplates.SIMPLE_EMAIL_TEMPALTE.format(first_name)
 
 
-def is_row_valid(row):
+def is_row_valid(row, emails_only_list):
     for field in REQUIRED_FIELDS:
         if not field in row:
             return False
         if len(row[field]) <= 0:
             return False
+        if len(emails_only_list) > 0:
+            if row["email"] not in emails_only_list:
+                return False
         return True
 
 
@@ -64,12 +69,14 @@ parser.add_argument('-emails',
                     nargs='+',
                     type=str,
                     help="send email to only these emails",
-                    dest="emails")
+                    dest="emails",
+                    default=[])
 
 
 results = parser.parse_args()
 
 csv_file = results.csv_file
+
 
 if not os.path.exists(csv_file):
     print "No file found:%s .. exiting" % csv_file
@@ -79,12 +86,16 @@ if not os.path.exists(csv_file):
 with open(csv_file) as csv_file_obj:
     csv_reader = csv.DictReader(csv_file_obj)
     for row in csv_reader:
-        if is_row_valid(row):
+        if is_row_valid(row, results.emails):
             email_text = create_email_string(row['first_name'])
-            res = send_email(to_address=row['email'], body=email_text, first_name=row["first_name"])
+            res = send_email(to_address=row['email'], body=email_text)
             if res.status_code == 200:
                 print "Email sent to {}, status:{}".format(row['email'], res.status_code)
             else:
                 print "Error ! while sending email :{} status:{}".format(row['email'], res.status_code)
+        else:
+            print "found invalid row {}, please check the required fields {} " \
+                  "and only_emails_list {}".format(row, REQUIRED_FIELDS, results.emails)
+
 
 
