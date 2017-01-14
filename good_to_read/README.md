@@ -4,5 +4,5 @@
 * https://learnpythonthehardway.org/book/
 
 ## Python module of the week
-*https://pymotw.com/2/
+* https://pymotw.com/2/
 
