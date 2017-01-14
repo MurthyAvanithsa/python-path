@@ -7,3 +7,6 @@ Looking forward to extend or relation with you in the new year
 <br>
 Thank you.
 '''
+
+def custom_template():
+    pass

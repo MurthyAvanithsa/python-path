@@ -12,20 +12,17 @@ EMAIL_CSV_FILE = "email_data.csv"
 
 REQUIRED_FIELDS = ["email", "first_name", "last_name"]
 
-
-
-
 # Send email using request object
-
 def send_email(to_address, body):
+
+    payload = {"to": to_address,
+     "from": "murthyavanithsa@gmail.com",
+     "html": body,
+     "subject": "Happy festivals"}
 
     request_result = requests.post(url=settings.MAILGUN_URL,
                                    auth=('api', settings.MAILGUN_API_KEY),
-                                   data={"to": to_address,
-                                         "from": "murthyavanithsa@gmail.com",
-                                         "html": body,
-                                         "subject": "Happy festivals"})
-
+                                   data=payload)
     return request_result
 
 
@@ -35,10 +32,14 @@ def create_email_string(first_name):
 
 def is_row_valid(row, emails_only_list):
     for field in REQUIRED_FIELDS:
+        # field exists
         if not field in row:
             return False
+        # non null
         if len(row[field]) <= 0:
             return False
+
+        # only emails
         if len(emails_only_list) > 0:
             if row["email"] not in emails_only_list:
                 return False

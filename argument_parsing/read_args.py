@@ -32,6 +32,8 @@ print "emails is : {}".format(arguments.nvalues)
 
 
 total_sum = arguments.n1+arguments.n2
+
+# List
 for num in arguments.nvalues:
     total_sum += num
 
