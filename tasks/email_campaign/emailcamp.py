@@ -1,10 +1,10 @@
 import argparse
 import os
 import csv
-import cgi
+import requests
+
 import emailtemplates
 import settings
-import requests
 
 
 # default file
@@ -16,6 +16,7 @@ REQUIRED_FIELDS = ["email", "first_name", "last_name"]
 
 
 # Send email using request object
+
 def send_email(to_address, body):
 
     request_result = requests.post(url=settings.MAILGUN_URL,
