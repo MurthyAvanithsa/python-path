@@ -17,9 +17,15 @@ SQL_QUERY = "SELECT * FROM coursedb.courses"
 
 cur.execute(SQL_QUERY)
 
-rows = cur.fetchmany(2)
+# rows = cur.fetchmany(2)
+#
+# for row in rows:
+#     for col in row:
+#         print col
 
-for row in rows:
-    for col in row:
-        print col
+res = cur.fetchmany(2)
 
+for row in res:
+    print row
+
+db.close()

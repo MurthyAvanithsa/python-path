@@ -1,24 +1,23 @@
 
 import MySQLdb
 import sys
-import MySQLdb.cursors
 
 USER_NAME = "root"
 USER_PASS = "password"
 USER_DB = "coursedb"
 
 
-db=MySQLdb.connect(user=USER_NAME,
+db = MySQLdb.connect(user=USER_NAME,
                    passwd=USER_PASS,
                    db=USER_DB)
 
-cur =db.cursor()
+cur = db.cursor()
 
-SQL_QUERY = "SELECT * FROM coursedb.courses"
+SQL_QUERY = "DELETE FROM coursedb.courses where id=%s"%(2006)
 
-cur.execute(SQL_QUERY)
+print cur.execute(SQL_QUERY)
 
-for row in cur:
-    print row
+db.commit()
 
 db.close()
+

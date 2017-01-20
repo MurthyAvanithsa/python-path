@@ -21,3 +21,5 @@ cur.execute(SQL_QUERY)
 
 for row in cur:
     print row
+
+db.close()
