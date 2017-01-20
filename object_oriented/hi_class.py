@@ -1,17 +1,33 @@
 
-class Course(object):
+class Training(object):
 
     def __init__(self):
+        self.default_duration = 90
         self.courses = list()
 
-    def join_course(self,course_name):
+    def join(self, course_name):
         self.courses.append(course_name)
+
+    def unsub(self, course_id):
+        pass
 
     def __str__(self):
         return "Working on "+",".join(self.courses)
 
-course = Course()
-course.join_course("Python")
-course.join_course("Android")
 
-print course
+
+free_training = Training()
+free_training.join("Basics")
+
+python_training = Training()
+python_training.join("Python-Basics")
+python_training.join("Python-Advanced")
+
+
+print free_training,id(free_training)
+
+print python_training, id(python_training)
+
+
+
+
