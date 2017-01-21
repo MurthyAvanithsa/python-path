@@ -23,5 +23,5 @@ class Course(BaseCourse):
 
 course = Course()
 course.join_course("Python")
-course.join_course("Android")
-print course
+
+print course.get_base_course()

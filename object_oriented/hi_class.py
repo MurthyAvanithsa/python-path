@@ -17,6 +17,7 @@ class Training(object):
 
 
 free_training = Training()
+
 free_training.join("Basics")
 
 python_training = Training()

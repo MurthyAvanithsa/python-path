@@ -6,13 +6,12 @@ class GuideLines(object):
         self.tutors.append("Murthy")
         self.tutors.append("John")
 
-    @classmethod
-    def course_guidelines(self):
+    @staticmethod
+    def course_guidelines():
         guide_lines = ["Start's at 8 AM IST", "Weekend will be on Saturday"]
         print "Guidelines ---\n"
         print ",\n".join(guide_lines)
-        print "\nTutors"
-        print "\n".join(self.tutors)
+
 
     @staticmethod
     def course_faq():
@@ -22,6 +21,8 @@ class GuideLines(object):
         print "FAQ ---\n"
         for key in guide_lines:
             print key,guide_lines[key]
+
+
 
 
 GuideLines.course_guidelines()
